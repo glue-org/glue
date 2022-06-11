@@ -1,5 +1,4 @@
 import { BACKEND_URL } from "./constants";
-import { SignIdentity } from "@dfinity/agent";
 
 interface Data {
   discordId: string;
@@ -33,4 +32,24 @@ export async function checkIfUserIsAuthorized(): Promise<boolean> {
     }
   }
   return response.status === 200;
+}
+
+export async function notifyServer(principal: string) {
+  // notify the server that we signed a message with the provided principal
+  const response: Response = await fetch(
+    BACKEND_URL + `/api/auth/glue/verify`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams({
+        principal,
+      }),
+      credentials: "include",
+    }, // this is needed so the browser will include the cookie send back in the response
+  );
+  console.log(response);
+  // remove code from query string
+  window.history.replaceState({}, "", window.location.pathname);
 }

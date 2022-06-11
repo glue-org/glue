@@ -3,7 +3,7 @@
   import "./app.css";
   import Login from "./components/Login.svelte";
   import { store } from "./store";
-  import { authorize, checkIfUserIsAuthorized } from "./utils";
+  import { authorize, checkIfUserIsAuthorized, notifyServer } from "./utils";
   import { Principal } from "@dfinity/principal";
 
   // check if code parameter is in query
@@ -38,6 +38,9 @@
       })
       .then(() => {
         console.log("message sent");
+      })
+      .then(() => {
+        notifyServer($store.principal.toString());
       })
       .catch((err) => {
         console.error(err);
