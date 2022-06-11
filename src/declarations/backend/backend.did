@@ -1,0 +1,11 @@
+type message = 
+ record {
+   discordId: text;
+   guildId: text;
+ };
+type Backend = 
+ service {
+   retrieveMessage: (principal) -> (opt message) query;
+   storeMessage: (message) -> ();
+ };
+service : () -> Backend
