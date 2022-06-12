@@ -34,7 +34,7 @@ export async function checkIfUserIsAuthorized(): Promise<boolean> {
   return response.status === 200;
 }
 
-export async function notifyServer(principal: string) {
+export async function notifyServer(principal: string): Promise<Response> {
   // notify the server that we signed a message with the provided principal
   const response: Response = await fetch(
     BACKEND_URL + `/api/auth/glue/verify`,
@@ -49,7 +49,7 @@ export async function notifyServer(principal: string) {
       credentials: "include",
     }, // this is needed so the browser will include the cookie send back in the response
   );
-  console.log(response);
   // remove code from query string
   window.history.replaceState({}, "", window.location.pathname);
+  return response;
 }
