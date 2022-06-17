@@ -1,0 +1,9 @@
+type message = 
+ record {
+   discordId: text;
+   guildId: text;
+ };
+service : {
+  retrieveMessage: (principal) -> (opt message) query;
+  storeMessage: (message) -> ();
+}

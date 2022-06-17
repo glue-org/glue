@@ -11,7 +11,7 @@ export async function authorize(code) {
   // make a fetch request to the backend using the code
   if (code) {
     const response: Response = await fetch(
-      BACKEND_URL + `/api/auth/discord/redirect/?code=${code}`,
+      BACKEND_URL + `/auth/discord/redirect/?code=${code}`,
       { credentials: "include" }, // this is needed so the browser will include the cookie send back in the response
     );
     console.log(response);
@@ -37,7 +37,7 @@ export async function checkIfUserIsAuthorized(): Promise<boolean> {
 export async function notifyServer(principal: string): Promise<Response> {
   // notify the server that we signed a message with the provided principal
   const response: Response = await fetch(
-    BACKEND_URL + `/api/auth/glue/verify`,
+    BACKEND_URL + `/auth/glue/verify`,
     {
       method: "POST",
       headers: {
