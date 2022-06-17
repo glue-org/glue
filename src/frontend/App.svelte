@@ -3,6 +3,7 @@
   import "./app.css";
   import Login from "./components/Login.svelte";
   import Menu from "./components/Menu.svelte";
+  import { REDIRECT_URL } from "./constants";
   import { store } from "./store";
   import { authorize, checkIfUserIsAuthorized, notifyServer } from "./utils";
 
@@ -63,9 +64,7 @@
 
 <div class="flex justify-center items-center h-screen">
   {#if !userIsAuthorized}
-    <a
-      href="https://discord.com/api/oauth2/authorize?client_id=974260670675697714&redirect_uri=http%3A%2F%2Flocalhost%3A3000&response_type=code&scope=identify"
-    >
+    <a href={REDIRECT_URL}>
       <button class="btn">authenticate via discord</button>
     </a>
   {/if}
