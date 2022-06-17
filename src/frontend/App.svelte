@@ -52,7 +52,7 @@
       })
       .catch((err) => {
         console.error(err);
-        alert("no guild provided");
+        alert(err);
       });
   }
 </script>
