@@ -21,7 +21,7 @@ export async function authorize(code) {
 }
 
 export async function checkIfUserIsAuthorized(): Promise<boolean> {
-  const response: Response = await fetch(BACKEND_URL + "/api/auth/status", {
+  const response: Response = await fetch(BACKEND_URL + "/auth/status", {
     credentials: "include",
   });
   // store user_id in session storage
