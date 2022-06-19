@@ -9,14 +9,18 @@ interface Data {
 
 export async function authorize(code) {
   // make a fetch request to the backend using the code
-  if (code) {
-    const response: Response = await fetch(
-      BACKEND_URL + `/auth/discord/redirect/?code=${code}`,
-      { credentials: "include" }, // this is needed so the browser will include the cookie send back in the response
-    );
-    console.log(response);
-    // remove code from query string
-    window.history.replaceState({}, "", window.location.pathname);
+  try {
+    if (code) {
+      const response: Response = await fetch(
+        BACKEND_URL + `/auth/discord/redirect?code=${code}`,
+        { credentials: "include" }, // this is needed so the browser will include the cookie send back in the response
+      );
+      console.log(response);
+      // remove code from query string
+      window.history.replaceState({}, "", window.location.pathname);
+    }
+  } catch (error) {
+    console.error(error);
   }
 }
 
