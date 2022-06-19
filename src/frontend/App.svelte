@@ -6,6 +6,7 @@
   import { REDIRECT_URL } from "./constants";
   import { store } from "./store";
   import { authorize, checkIfUserIsAuthorized, notifyServer } from "./utils";
+  import Logo from "./assets/glue.png";
 
   // check if code parameter is in query
   const code = new URLSearchParams(window.location.search).get("code");
@@ -60,7 +61,10 @@
 
 <Menu />
 
-<h1 class="text-9xl text-center">GLUE</h1>
+<!-- svelte-ignore a11y-missing-attribute -->
+<div class="flex items-center justify-center">
+  <img src={Logo} class="w-1/2 h-auto" />
+</div>
 
 <div class="flex justify-center items-center h-screen">
   {#if !userIsAuthorized}
