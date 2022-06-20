@@ -5,7 +5,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "serve": "vite preview",
-    "predev": "dfx canister create backend && dfx build backend && npm run copy:types && dfx deploy --mode=reinstall backend",
+    "predev": "dfx stop && dfx start --background --clean && dfx canister create backend && dfx build backend && npm run copy:types && dfx deploy --mode=reinstall backend",
     "copy:types": "rsync -avr .dfx/$(echo ${DFX_NETWORK:-'**'})/canisters/** --exclude='assets/' --exclude='idl/' --exclude='*.wasm' --delete src/declarations"
   },
   "dependencies": {
