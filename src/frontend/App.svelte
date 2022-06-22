@@ -62,28 +62,32 @@
 <Menu />
 
 <!-- svelte-ignore a11y-missing-attribute -->
-<div class="flex items-center justify-center">
-  <img src={Logo} class="w-1/2 h-auto" />
-</div>
+<div class="py-10 space-y-20 h-full">
+  <div class="flex items-center justify-center">
+    <img src={Logo} class="w-1/2 h-auto" />
+  </div>
 
-<div class="flex justify-center items-center h-screen">
-  {#if !userIsAuthorized}
-    <a href={REDIRECT_URL}>
-      <button class="btn">authenticate via discord</button>
-    </a>
-  {/if}
-  {#if !$store.isAuthed && userIsAuthorized}
-    <Login />
-  {:else if $store.isAuthed && userIsAuthorized}
-    <div class="flex flex-col items-center justify-center">
-      {#if verifyingUser}
-        <progress class="progress w-56" />
-        <div>verifying user ...</div>
-      {:else if error}
-        <div>an error occured, please try again</div>
-      {:else}
-        <div>you can close this page now</div>
+  <div class="py-20">
+    <div class="flex justify-center items-center py-20">
+      {#if !userIsAuthorized}
+        <a href={REDIRECT_URL}>
+          <button class="btn rounded-xl">authenticate via discord</button>
+        </a>
+      {/if}
+      {#if !$store.isAuthed && userIsAuthorized}
+        <Login />
+      {:else if $store.isAuthed && userIsAuthorized}
+        <div class="flex flex-col items-center justify-center">
+          {#if verifyingUser}
+            <progress class="progress w-56" />
+            <div>verifying user ...</div>
+          {:else if error}
+            <div>an error occured, please try again</div>
+          {:else}
+            <div>you can close this page now</div>
+          {/if}
+        </div>
       {/if}
     </div>
-  {/if}
+  </div>
 </div>
