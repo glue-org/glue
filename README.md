@@ -6,6 +6,13 @@
 
 - `dfx 0.10.0`
 - `node v18.0.2`
+- `.env` file with the following entries:
+
+  - BACKEND_URL
+    - provide the URL for both production and development backend
+  - REDIRECT_URL
+    - provide the URL to redirect users to log in to discord
+      - make sure you have two different `client_id`s and `redirect_uri`s for production and development if you use different discord bots
 
 ## local deployment
 
