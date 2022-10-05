@@ -7,6 +7,7 @@
   import { store } from "./store";
   import { authorize, checkIfUserIsAuthorized, notifyServer } from "./utils";
   import Logo from "./assets/glue.png";
+  import Footer from "./components/Footer.svelte";
 
   // check if code parameter is in query
   const code = new URLSearchParams(window.location.search).get("code");
@@ -18,11 +19,28 @@
     window.sessionStorage.setItem("guild", guild);
   }
 
+  // check if theme is provided
+  const theme = new URLSearchParams(window.location.search).get("theme");
+
+  // check if logo is provided
+  const customLogo = new URLSearchParams(window.location.search).get("logo")
+    ? Buffer.from(
+        new URLSearchParams(window.location.search).get("logo"),
+        "base64",
+      ).toString("ascii")
+    : null;
+  console.log("this is your logo src decoded", customLogo);
+
   let userIsAuthorized = false;
   let verifyingUser = false;
   let error = false;
 
   onMount(async () => {
+    // get a reference to the html tag
+    if (theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+    }
+
     // check if user is authorized via session cookie
     userIsAuthorized = await checkIfUserIsAuthorized();
     // if not, try and authorize her
@@ -61,16 +79,19 @@
 
 <Menu />
 
-<!-- svelte-ignore a11y-missing-attribute -->
 <div
   class="py-10 space-y-20 h-screen flex flex-col items-center justify-evenly"
 >
-  <img src={Logo} class="w-1/2 h-auto" />
+  <img
+    src={customLogo ? customLogo : Logo}
+    class="w-1/2 h-auto"
+    alt="glue logo"
+  />
 
   <div class="">
     {#if !userIsAuthorized}
-      <a href={REDIRECT_URL}>
-        <button class="btn">authenticate via discord</button>
+      <a href={REDIRECT_URL} >
+        <button class="btn mb-20">authenticate via discord</button>
       </a>
     {/if}
     {#if !$store.isAuthed && userIsAuthorized}
@@ -89,3 +110,5 @@
     {/if}
   </div>
 </div>
+
+<Footer />
