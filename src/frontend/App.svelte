@@ -21,6 +21,10 @@
 
   // check if theme is provided
   const theme = new URLSearchParams(window.location.search).get("theme");
+  // store string in window.sessionStorage
+  if (theme) {
+    window.sessionStorage.setItem("theme", theme);
+  }
 
   // check if logo is provided
   const customLogo = new URLSearchParams(window.location.search).get("logo")
@@ -29,6 +33,10 @@
         "base64",
       ).toString("ascii")
     : null;
+  // store string in window.sessionStorage
+  if (customLogo) {
+    window.sessionStorage.setItem("customLogo", customLogo);
+  }
   console.log("this is your logo src decoded", customLogo);
 
   let userIsAuthorized = false;
@@ -37,8 +45,11 @@
 
   onMount(async () => {
     // get a reference to the html tag
-    if (theme) {
-      document.documentElement.setAttribute("data-theme", theme);
+    if (window.sessionStorage.getItem("theme")) {
+      document.documentElement.setAttribute(
+        "data-theme",
+        window.sessionStorage.getItem("theme"),
+      );
     }
 
     // check if user is authorized via session cookie
@@ -83,14 +94,16 @@
   class="py-10 space-y-20 h-screen flex flex-col items-center justify-evenly"
 >
   <img
-    src={customLogo ? customLogo : Logo}
+    src={window.sessionStorage.getItem("customLogo")
+      ? window.sessionStorage.getItem("customLogo")
+      : Logo}
     class="w-1/2 h-auto"
     alt="glue logo"
   />
 
   <div class="">
     {#if !userIsAuthorized}
-      <a href={REDIRECT_URL} >
+      <a href={REDIRECT_URL}>
         <button class="btn mb-20">authenticate via discord</button>
       </a>
     {/if}

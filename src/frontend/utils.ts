@@ -57,13 +57,3 @@ export async function notifyServer(principal: string): Promise<Response> {
   window.history.replaceState({}, "", window.location.pathname);
   return response;
 }
-function b64EncodeUnicode(str) {
-  return btoa(encodeURIComponent(str));
-}
-
-function UnicodeDecodeB64(str) {
-  return decodeURIComponent(atob(str));
-}
-
-b64EncodeUnicode("✓ à la mode"); // "JUUyJTlDJTkzJTIwJUMzJUEwJTIwbGElMjBtb2Rl"
-UnicodeDecodeB64("JUUyJTlDJTkzJTIwJUMzJUEwJTIwbGElMjBtb2Rl"); // "✓ à la mode"
