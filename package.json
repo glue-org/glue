@@ -17,6 +17,7 @@
     "@dfinity/principal": "^0.10.0",
     "daisyui": "^2.15.2",
     "ic-stoic-identity": "^2.0.0",
+    "svelte-spa-router": "^3.3.0",
     "tweetnacl": "^1.0.3"
   },
   "devDependencies": {
