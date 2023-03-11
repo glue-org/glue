@@ -1,6 +1,7 @@
 <script>
   import PlugButton from "./PlugButton.svelte";
   import StoicButton from "./StoicButton.svelte";
+  import BitfinityButton from "./BitfinityButton.svelte";
 
   let isModalOpen = false;
 
@@ -27,6 +28,7 @@
     <div class="flex flex-col gap-4 mt-3">
       <StoicButton bind:loading {toggleModal} />
       <PlugButton bind:loading {toggleModal} />
+      <BitfinityButton bind:loading {toggleModal} />
     </div>
   </label>
 </label>
