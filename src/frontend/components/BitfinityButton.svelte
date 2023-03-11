@@ -1,7 +1,5 @@
 <script lang="ts">
   import { store } from "../store";
-
-  import spinner from "../assets/loading.gif";
   import Button from "./Button.svelte";
 
   export let loading;
@@ -15,13 +13,9 @@
   }
 </script>
 
-<Button
-  on:click={connect}
-  disabled={loading}
-  style={"lg:h-16 2xl:h-20 lg:rounded-[55px]"}
->
+<Button on:click={connect} disabled={loading}>
   {#if loading === "bitfinity"}
-    <img class="h-6 block" src={spinner} alt="loading animation" />
+    loading
   {:else}
     bitfinity
   {/if}
