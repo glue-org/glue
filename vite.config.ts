@@ -12,7 +12,7 @@ interface CanisterIds {
   [key: string]: { [key in Network]: string };
 }
 
-let canisterIds: CanisterIds;
+let canisterIds: CanisterIds = {};
 try {
   canisterIds = JSON.parse(
     fs
@@ -63,13 +63,13 @@ const canisterDefinitions = Object.entries({
 
 console.log(canisterDefinitions);
 
-// Gets the port dfx is running on from dfx.json
-const DFX_PORT = dfxJson.networks.local.bind.split(":")[1];
-
 // See guide on how to configure Vite at:
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [svelte()],
+  build: {
+    target: "es2020",
+  },
   resolve: {
     alias: {
       // Here we tell Vite the "fake" modules that we want to define
@@ -85,7 +85,7 @@ export default defineConfig({
     proxy: {
       // This proxies all http requests made to /api to our running dfx instance
       "/api": {
-        target: `http://localhost:${DFX_PORT}`,
+        target: `http://127.0.0.1:4943}`,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, "/api"),
       },
