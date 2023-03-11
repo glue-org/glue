@@ -85,7 +85,7 @@ export default defineConfig({
     proxy: {
       // This proxies all http requests made to /api to our running dfx instance
       "/api": {
-        target: `http://127.0.0.1:4943}`,
+        target: "http://127.0.0.1:4943",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, "/api"),
       },

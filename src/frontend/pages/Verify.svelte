@@ -41,6 +41,7 @@
   let userIsAuthorized = false;
   let verifyingUser = false;
   let error = false;
+  let errorText = "";
 
   onMount(async () => {
     // get a reference to the html tag
@@ -72,17 +73,22 @@
       .then(() => {
         return notifyServer($store.principal.toString());
       })
-      .then((reponse) => {
-        if (reponse.ok) {
+      .then((response) => {
+        if (response.ok) {
           console.log("message sent");
           verifyingUser = false;
         } else {
-          error = true;
+          response.text().then((text) => {
+            verifyingUser = false;
+            error = true;
+            errorText = text;
+          });
         }
       })
       .catch((err) => {
-        console.error(err);
-        alert(err);
+        verifyingUser = false;
+        error = true;
+        errorText = err;
       });
   }
 </script>
@@ -115,6 +121,7 @@
           <div>verifying user ...</div>
         {:else if error}
           <div>an error occured, please try again</div>
+          <div>{errorText}</div>
         {:else}
           <div>you can close this page now</div>
         {/if}
