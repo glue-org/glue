@@ -6,7 +6,7 @@
 
 - `dfx 0.10.0`
 - `node v18.0.2`
-- `.env` file with the following entries:
+- `src/frontend/constants.ts` file with the following entries:
 
   - BACKEND_URL
     - provide the URL for both production and development backend
